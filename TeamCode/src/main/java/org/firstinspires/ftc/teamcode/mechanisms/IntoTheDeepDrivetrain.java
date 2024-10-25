@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
@@ -57,7 +56,6 @@ public class IntoTheDeepDrivetrain {
         imu.resetYaw();
     }
 
-    //TODO: Implement polardrive(), yawReset(), and yawHeading() for LM1
     public double yawHeading() {
         double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
         return botHeading;

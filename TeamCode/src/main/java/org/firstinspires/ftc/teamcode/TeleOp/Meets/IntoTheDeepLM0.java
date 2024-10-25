@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.TeleOp;
+package org.firstinspires.ftc.teamcode.TeleOp.Meets;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.mechanisms.IntoTheDeepDrivetrain;
 
 @TeleOp
-public class CentricDriveTest extends OpMode {
+public class IntoTheDeepLM0 extends OpMode {
     IntoTheDeepDrivetrain drivetrain = new IntoTheDeepDrivetrain();
     @Override
     public void init(){
@@ -32,7 +32,6 @@ public class CentricDriveTest extends OpMode {
 
         drivetrain.fieldCentricDrive(rotX, rotY, turn, denim);
     }
-
 
     @Override
     public void stop() {

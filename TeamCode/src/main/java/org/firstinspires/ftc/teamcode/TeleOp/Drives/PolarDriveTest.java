@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.TeleOp;
+package org.firstinspires.ftc.teamcode.TeleOp.Drives;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.mechanisms.IntoTheDeepDrivetrain;
 
 @TeleOp
-public class DriveTest extends OpMode {
+public class PolarDriveTest extends OpMode {
 
     IntoTheDeepDrivetrain drivetrain = new IntoTheDeepDrivetrain();
     @Override
@@ -15,20 +15,24 @@ public class DriveTest extends OpMode {
     }
 
     @Override
-    public void loop(){
+    public void loop() {
         float forward = -gamepad1.left_stick_y;
         float right = gamepad1.left_stick_x;
         float turn = gamepad1.right_stick_x;
-        double multiplier;
 
-        if (gamepad1.right_bumper) {
-            multiplier = 1;
-        } else {
-            multiplier = 0.5;
+        if (gamepad1.options) {
+            drivetrain.yawReset();
         }
-        drivetrain.drive(forward, right, turn, multiplier);
-    }
 
+        double botHeading = drivetrain.yawHeading();
+
+        double rotX = right * Math.cos(-botHeading) - forward * Math.sin(-botHeading);
+        double rotY = right * Math.sin(-botHeading) + forward * Math.cos(-botHeading);
+
+        double denim = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(turn), 1);
+
+        drivetrain.polarDrive(rotX, rotY, turn, denim);
+    }
     @Override
     public void stop() {
         drivetrain.stopMotors();
