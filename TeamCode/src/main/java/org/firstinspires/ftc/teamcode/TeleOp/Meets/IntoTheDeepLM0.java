@@ -3,14 +3,18 @@ package org.firstinspires.ftc.teamcode.TeleOp.Meets;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.mechanisms.IntoTheDeepDrivetrain;
+import org.firstinspires.ftc.teamcode.mechanisms.Drivetrain;
+import org.firstinspires.ftc.teamcode.mechanisms.FrontExt;
 
 @TeleOp
 public class IntoTheDeepLM0 extends OpMode {
-    IntoTheDeepDrivetrain drivetrain = new IntoTheDeepDrivetrain();
+    Drivetrain drivetrain = new Drivetrain();
+    FrontExt scoring = new FrontExt();
+
     @Override
     public void init(){
         drivetrain.init(hardwareMap);
+        scoring.init(hardwareMap);
     }
 
     @Override

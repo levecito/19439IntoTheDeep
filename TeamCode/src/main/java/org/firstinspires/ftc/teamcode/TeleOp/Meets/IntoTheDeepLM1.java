@@ -1,17 +1,23 @@
-package org.firstinspires.ftc.teamcode.TeleOp.Drives;
+package org.firstinspires.ftc.teamcode.TeleOp.Meets;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.mechanisms.BackLift;
 import org.firstinspires.ftc.teamcode.mechanisms.Drivetrain;
+import org.firstinspires.ftc.teamcode.mechanisms.FrontExt;
 
 @TeleOp
-public class CentricDriveTest extends OpMode {
-
+public class IntoTheDeepLM1 extends OpMode {
     Drivetrain drivetrain = new Drivetrain();
+    FrontExt frontExtension = new FrontExt();
+    BackLift backLift = new BackLift();
+
     @Override
     public void init(){
         drivetrain.init(hardwareMap);
+        frontExtension.init(hardwareMap);
+        backLift.init(hardwareMap);
     }
 
     @Override

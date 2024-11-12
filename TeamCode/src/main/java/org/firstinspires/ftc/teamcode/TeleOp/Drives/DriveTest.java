@@ -3,12 +3,12 @@ package org.firstinspires.ftc.teamcode.TeleOp.Drives;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.mechanisms.IntoTheDeepDrivetrain;
+import org.firstinspires.ftc.teamcode.mechanisms.Drivetrain;
 
 @TeleOp
 public class DriveTest extends OpMode {
 
-    IntoTheDeepDrivetrain drivetrain = new IntoTheDeepDrivetrain();
+    Drivetrain drivetrain = new Drivetrain();
     @Override
     public void init(){
         drivetrain.init(hardwareMap);
