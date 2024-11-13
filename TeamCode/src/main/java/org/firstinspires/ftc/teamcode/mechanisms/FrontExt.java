@@ -27,27 +27,104 @@ public class FrontExt {
         leftTransfer.setDirection(Servo.Direction.REVERSE);
     }
 
+    /**
+    * The following 4 (+1) void loops are all for transfers. On foenem grave.
+     */
     public void setTransfer(double L, double R) {
         leftTransfer.setPosition(L);
         rightTransfer.setPosition(R);
     }
 
-    public void setBackPivot(double pos) {
-        backPivot.setPosition(pos);
+    public void transferInit() {
+        setTransfer(0.4, 0.4);
     }
 
-    public void setFrontPivot(double pos) {
-        frontPivot.setPosition(pos);
+    public void transferFullIn() {
+        setTransfer(0.4,0.4);
     }
+
+    public void transferMiddle() {
+        setTransfer(0.55, 0.55);
+    }
+    public void TransferExtend() {
+        setTransfer(1.0, 0.75);
+    }
+
+    /**
+     * The following 2 (+1) are claw positions.
+     */
 
     public void setFrontClaw(double pos) {
         frontClaw.setPosition(pos);
     }
 
+    public void frontClawOpen() {
+        setFrontClaw(0.23);
+    }
+
+    public void frontClawGrab() {
+        setFrontClaw(0.0);
+    }
+
+    /**
+     * The following 2 (+1) are wrist loops.
+     *
+     */
     public void setWristClaw(double pos) {
         wristClaw.setPosition(pos);
     }
 
+    public void wristInit() {
+        setWristClaw(0.43);
+    }
+
+    public void wristRotate() {
+        setWristClaw(0.8);
+    }
+
+    /**
+     * The following 3 (+1) positions are for the front pivot servo.
+     *
+     */
+    public void setFrontPivot(double pos) {
+        frontPivot.setPosition(pos);
+    }
+
+    public void frontPivotBase(double pos) {
+        setFrontPivot(0.7);
+    }
+
+    public void frontPivotGrab(double pos) {
+        setFrontPivot(1.0);
+    }
+
+    public void frontPivotTransfer() {
+        setFrontPivot(0.35);
+    }
+
+    /**
+     * The following 4 (+1) positions are for the back pivot servo.
+     *
+     */
+    public void setBackPivot(double pos) {
+        backPivot.setPosition(pos);
+    }
+
+    public void backPivotBase () {
+        setBackPivot(0.3);
+    }
+
+    public void backPivotTransfer() {
+        setBackPivot(0.0);
+    }
+
+    public void backPivotGrab() {
+        setBackPivot(0.35);
+    }
+
+    public void backPivotPreGrab() {
+        setBackPivot(0.3);
+    }
 
 }
 

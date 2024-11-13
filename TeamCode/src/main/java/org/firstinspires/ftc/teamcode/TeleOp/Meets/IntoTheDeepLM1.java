@@ -22,6 +22,8 @@ public class IntoTheDeepLM1 extends OpMode {
 
     @Override
     public void loop() {
+
+        //Drive
         float forward = -gamepad1.left_stick_y;
         float right = gamepad1.left_stick_x;
         float turn = gamepad1.right_stick_x;
@@ -38,6 +40,8 @@ public class IntoTheDeepLM1 extends OpMode {
         double denim = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(turn), 1);
 
         drivetrain.fieldCentricDrive(rotX, rotY, turn, denim);
+
+
     }
 
     @Override
