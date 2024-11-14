@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -90,11 +89,11 @@ public class FrontExt {
         frontPivot.setPosition(pos);
     }
 
-    public void frontPivotBase(double pos) {
+    public void frontPivotBase() {
         setFrontPivot(0.7);
     }
 
-    public void frontPivotGrab(double pos) {
+    public void frontPivotGrab() {
         setFrontPivot(1.0);
     }
 
@@ -127,10 +126,3 @@ public class FrontExt {
     }
 
 }
-
-
-/*
-    public void transferServo(double pos) {
-        transferServo.setPosition(pos);
-    }
- */

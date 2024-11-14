@@ -25,6 +25,10 @@ public class BackLift {
         slidePivot.setDirection(Servo.Direction.REVERSE);
     }
 
+    /**
+     * The following 6 (+1) loops all have to do with different slide position. I don't know what the one with setSlides(1350) does.
+     *
+     */
     public void setSlides(int slidePos) {
         slidesL.setTargetPosition(slidePos);
         slidesR.setTargetPosition(slidePos);
@@ -34,15 +38,73 @@ public class BackLift {
         slidesR.setPower(1);
     }
 
+    public void slidesBase() {
+        setSlides(0);
+    }
+
+    public void slidesTop() {
+        setSlides(2250);
+    }
+
+    public void slidesMiddle() {
+        setSlides(800);
+    }
+
+    public void slidesSpecimenGrab() {
+        setSlides(0);
+    }
+
+    public void slidesSpecimenHang() {
+        setSlides(1000);
+    }
+
+    public void slidesSpecimenPreHang() {
+        setSlides(1350);
+    }
+
+    /**
+     * The following 2 (+1) loops all have to do with SlidePivot positions.
+     */
     public void setSlidePivot(double pos) {
         slidePivot.setPosition(pos);
     }
+
+    public void slidePivotBase() {
+        setSlidePivot(0);
+    }
+
+    public void slidePivotDrop() {
+        setSlidePivot(0.8);
+    }
+
+    /**
+     * The following 2 (+1) are slide claw positions.
+     */
 
     public void setSlideClaw(double pos) {
         slideClaw.setPosition(pos);
     }
 
+    public void slideClawOpen() {
+        setSlideClaw(0.5);
+    }
+
+    public void slideClawClose() {
+        setSlideClaw(0.0);
+    }
+
+    /**
+     * The following 2 (+1) are specimen claw positions.
+     */
     public void setSpecimenClaw(double pos) {
         specimenClaw.setPosition(pos);
+    }
+
+    public void specimenOpen() {
+        setSpecimenClaw(0.3);
+    }
+
+    public void specimenClose() {
+        setSpecimenClaw(0.0);
     }
 }
