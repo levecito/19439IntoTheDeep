@@ -24,6 +24,12 @@ public class FrontExt {
         frontPivot.setDirection(Servo.Direction.REVERSE);
         frontClaw.setDirection(Servo.Direction.REVERSE);
         leftTransfer.setDirection(Servo.Direction.REVERSE);
+
+        backPivotBase();
+        frontPivotTransfer();
+        wristInit();
+        frontClawOpen();
+        transferInit();
     }
 
     /**
@@ -45,7 +51,7 @@ public class FrontExt {
     public void transferMiddle() {
         setTransfer(0.55, 0.55);
     }
-    public void TransferExtend() {
+    public void transferExtend() {
         setTransfer(1.0, 0.75);
     }
 

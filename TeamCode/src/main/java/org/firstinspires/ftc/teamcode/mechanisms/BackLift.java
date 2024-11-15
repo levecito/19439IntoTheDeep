@@ -23,6 +23,10 @@ public class BackLift {
         slidesL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slidesR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slidePivot.setDirection(Servo.Direction.REVERSE);
+
+        slideClawOpen();
+        slidePivotBase();
+        specimenOpen();
     }
 
     /**
