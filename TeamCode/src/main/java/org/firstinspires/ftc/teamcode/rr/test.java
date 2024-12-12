@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode.rr;
 
+import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.SequentialAction;
+import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -18,10 +21,19 @@ public class test extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+
+            Action test1 = drive.actionBuilder(initPose)
+                    .lineToX(-48)
+                    .turn(Math.PI/2)
+                    .lineToY(-20)
+                    .endTrajectory()
+                    .build();
+
             Actions.runBlocking(
-                    drive.actionBuilder(initPose)
-                            .lineToX(-50)
-                            .build());
+                    new SequentialAction(
+                          test1
+                    )
+            );
         }
     }
 }
