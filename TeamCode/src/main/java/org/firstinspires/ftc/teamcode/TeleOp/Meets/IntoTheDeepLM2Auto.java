@@ -120,13 +120,16 @@ public class IntoTheDeepLM2Auto extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, initPose);
         Slides slides = new Slides(hardwareMap);
 
-        TrajectoryActionBuilder preloadPlace = drive.actionBuilder(initPose)
+        // FIXME: oh jeebz...
+        // Note: strafeToLinearHeading(new Vector2d(-52, -54), Math.PI/4)
+        // is the BEST way to get back to score samples.
+        TrajectoryActionBuilder preloadPlaceSpecimen = drive.actionBuilder(initPose)
                 .strafeTo(new Vector2d(-4, -58))
                 .strafeToLinearHeading(new Vector2d(-48, -58), Math.PI/4);
 
-        Action finishProg = preloadPlace.endTrajectory().fresh().build();
+        Action finishProg = preloadPlaceSpecimen.endTrajectory().fresh().build();
 
-        Action preloading = preloadPlace.build();
+        Action preloading = preloadPlaceSpecimen.build();
 
         waitForStart();
 
