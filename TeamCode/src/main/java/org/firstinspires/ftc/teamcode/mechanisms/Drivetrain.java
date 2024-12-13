@@ -16,7 +16,6 @@ public class Drivetrain {
 
     public void init(HardwareMap hwMap) {
         //call Motor names
-        //TODO: Motor Names
         frontLeftMotor = hwMap.get(DcMotor.class, "leftFront"); //motor 3
         frontRightMotor = hwMap.get(DcMotor.class, "rightFront"); //motor 2
         backLeftMotor = hwMap.get(DcMotor.class, "leftBack"); //motor 1
