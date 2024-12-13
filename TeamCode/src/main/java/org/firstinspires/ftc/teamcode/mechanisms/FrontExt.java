@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+// TODO: update EVERYTHING according to Sean's project BEFORE LM2.
 public class FrontExt {
     private Servo backPivot;
     private Servo frontPivot;

@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+// TODO: update EVERYTHING according to Sean's project BEFORE LM2.
 public class BackLift {
     private DcMotor slidesR;
     private DcMotor slidesL;
