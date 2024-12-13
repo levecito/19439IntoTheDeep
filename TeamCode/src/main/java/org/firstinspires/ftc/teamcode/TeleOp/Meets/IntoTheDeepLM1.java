@@ -27,7 +27,7 @@ public class IntoTheDeepLM1 extends OpMode {
     @Override
     public void loop() {
 
-        //P1 drive code, field centric (up is always up)
+        // P1 drive code, field centric (up is always up)
         float forward = -gamepad1.left_stick_y;
         float right = gamepad1.left_stick_x;
         float turn = gamepad1.right_stick_x;
@@ -53,28 +53,28 @@ public class IntoTheDeepLM1 extends OpMode {
 
         drivetrain.fieldCentricDrive(rotX * mult, rotY * mult, turn * mult, denim * mult);
 
-        /**
-         * Button Map!
-         * P1
-         * X - Hard Reset
-         * A - Transfer
-         * B - Grab
-         * L3 - Wrist Turn
-         * R3 - Wrist Reset
-         * R1 - Front Pivot Down
-         * L1 - Turbo
-         * Up - Slides Up
-         * Right - Slides Mid
-         * Down - Slides Down
-         * P2
-         * Up - Pivot Basket (High)
-         * Down - Specimen Drop
-         * Left - Specimen Grab
-         * Right - Pivot Basket (Middle)
-         * B - Reset BackLift
+        /*
+          Button Map!
+          P1
+          X - Hard Reset
+          A - Transfer
+          B - Grab
+          L3 - Wrist Turn
+          R3 - Wrist Reset
+          R1 - Front Pivot Down
+          L1 - Turbo
+          Up - Slides Up
+          Right - Slides Mid
+          Down - Slides Down
+          P2
+          Up - Pivot Basket (High)
+          Down - Specimen Drop
+          Left - Specimen Grab
+          Right - Pivot Basket (Middle)
+          B - Reset BackLift
          */
 
-        //Hard reset all positions.
+        // Hard reset all positions.
         if (gamepad1.x) {
             backLift.slideClawOpen();
             backLift.slidePivotBase();
@@ -87,7 +87,7 @@ public class IntoTheDeepLM1 extends OpMode {
             backLift.slidesBase();
         }
 
-        //Transfer specimen from front to back extension.
+        // Transfer specimen from front to back extension.
         if (gamepad1.a) {
             runtime.reset();
             while (runtime.seconds() <= 1) {
@@ -104,7 +104,7 @@ public class IntoTheDeepLM1 extends OpMode {
             frontExtension.frontPivotBase();
         }
 
-        //Grab specimen.
+        // Grab specimen.
         if (gamepad1.b) {
             runtime.reset();
             while (runtime.seconds() <= 0.25) {
@@ -118,7 +118,7 @@ public class IntoTheDeepLM1 extends OpMode {
             frontExtension.backPivotBase();
         }
 
-        //Turn wrist.
+        // Turn wrist.
         if (gamepad1.left_stick_button) {
             frontExtension.wristRotate();
         }
@@ -127,7 +127,7 @@ public class IntoTheDeepLM1 extends OpMode {
             frontExtension.wristInit();
         }
 
-        //Slide positions.
+        // Slide positions.
         if (gamepad1.dpad_up) {
             frontExtension.transferExtend();
             frontExtension.frontPivotBase();
@@ -149,13 +149,13 @@ public class IntoTheDeepLM1 extends OpMode {
             frontExtension.wristInit();
         }
 
-        //Slide pivot for baskets.
+        // Slide pivot for baskets.
         if (gamepad2.dpad_up) {
             backLift.slidesTop();
             backLift.slidePivotDrop();
         }
 
-        //Drop specimen.
+        // Drop specimen.
         if (gamepad2.dpad_down) {
             runtime.reset();
             while (runtime.seconds() <= 0.5) {
@@ -170,12 +170,12 @@ public class IntoTheDeepLM1 extends OpMode {
             backLift.slidesSpecimenPreHang();
         }
 
-        //Middle slides.
+        // Middle slides.
         if (gamepad2.dpad_right) {
             backLift.slidesMiddle();
         }
 
-        //Reset slides and claws.
+        // Reset slides and claws.
         if (gamepad2.b) {
             backLift.slidePivotBase();
             backLift.specimenOpen();

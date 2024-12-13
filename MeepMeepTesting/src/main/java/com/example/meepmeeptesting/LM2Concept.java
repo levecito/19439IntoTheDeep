@@ -5,7 +5,7 @@ import com.acmerobotics.roadrunner.Vector2d;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 
-public class MeepMeep {
+public class LM2Concept {
     public static void main(String[] args) {
         com.noahbres.meepmeep.MeepMeep meepMeep = new com.noahbres.meepmeep.MeepMeep(600);
 
@@ -16,12 +16,10 @@ public class MeepMeep {
                 .setConstraints(50, 50, Math.PI, Math.PI, 10.5)
                 .build();
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-10, -62, 0))
-                .lineToX(-48)
-                .turn(Math.PI/2)
-                .lineToY(-20)
-                .setTangent(0)
-                .splineTo(new Vector2d(-48, -62), -Math.PI / 2)
+        // FINALLY!!!
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-4, -62, 0))
+                .strafeTo(new Vector2d(-4, -56))
+                .strafeToLinearHeading(new Vector2d(-50, -56), Math.PI/4)
                 .build());
 
         meepMeep.setBackground(com.noahbres.meepmeep.MeepMeep.Background.FIELD_INTO_THE_DEEP_OFFICIAL)
