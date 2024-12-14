@@ -27,10 +27,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.rr.MecanumDrive;
 
 
-// Does anyone know how a linear OpMode works????? help
 @Config
 @Autonomous(name = "LM2 Auto", group = "Autonomous")
 public class IntoTheDeepLM2Auto extends LinearOpMode {
+
 
     public static class Slides {
         private final DcMotorEx slidesL;
@@ -61,7 +61,7 @@ public class IntoTheDeepLM2Auto extends LinearOpMode {
                 packet.put("slideLPos", posL);
 
                 double posR = slidesR.getCurrentPosition();
-                packet.put("slideRPos", posL);
+                packet.put("slideRPos", posR);
 
                 if (posL < 2250 & posR < 2250) {
                     return true;
@@ -92,7 +92,7 @@ public class IntoTheDeepLM2Auto extends LinearOpMode {
                 packet.put("slideLPos", posL);
 
                 double posR = slidesR.getCurrentPosition();
-                packet.put("slideRPos", posL);
+                packet.put("slideRPos", posR);
 
                 if (posL > 50 & posR > 50) {
                     return true;
@@ -110,13 +110,12 @@ public class IntoTheDeepLM2Auto extends LinearOpMode {
     }
 
     public static class ExtFront {
-        private Servo backPivot;
-        private Servo frontPivot;
-        private Servo wristClaw;
-        private Servo frontClaw;
-        private Servo leftTransfer;
-        private Servo rightTransfer;
-
+        private final Servo backPivot;
+        private final Servo frontPivot;
+        private final Servo wristClaw;
+        private final Servo frontClaw;
+        private final Servo leftTransfer;
+        private final Servo rightTransfer;
         public ExtFront(HardwareMap hwMap) {
             leftTransfer = hwMap.get(Servo.class, "left");
             rightTransfer = hwMap.get(Servo.class, "right");
@@ -132,6 +131,8 @@ public class IntoTheDeepLM2Auto extends LinearOpMode {
             frontPivot.setDirection(Servo.Direction.REVERSE);
             backPivot.setDirection(Servo.Direction.REVERSE);
         }
+
+
 
         public class TransferIn implements Action {
             @Override
@@ -250,6 +251,8 @@ public class IntoTheDeepLM2Auto extends LinearOpMode {
             }
         }
 
+
+
         public Action backPivotBase() {
             return new BackPivotBase();
         }
@@ -270,11 +273,13 @@ public class IntoTheDeepLM2Auto extends LinearOpMode {
 
     public static class ExtBack {
 
-        private Servo slidePivot;
-        private Servo slideClaw;
+        private final Servo slidePivot;
+        private final Servo slideClaw;
         public ExtBack(HardwareMap hwMap) {
             slidePivot = hwMap.get(Servo.class, "slide pivot");
             slideClaw = hwMap.get(Servo.class, "slide claw");
+
+            slidePivot.setDirection(Servo.Direction.REVERSE);
         }
 
         public class SlidePivotBase implements Action {
@@ -316,8 +321,8 @@ public class IntoTheDeepLM2Auto extends LinearOpMode {
         public class SlideClawClose implements Action {
             @Override
             public boolean run(@NonNull TelemetryPacket packet) {
-                slideClaw.setPosition(1.0);
-                return false;
+                slideClaw.setPosition(0.2);
+                    return false;
             }
         }
 
@@ -335,34 +340,65 @@ public class IntoTheDeepLM2Auto extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, initPose);
         Slides slides = new Slides(hardwareMap);
         ExtFront extFront = new ExtFront(hardwareMap);
+        ExtBack extBack = new ExtBack(hardwareMap);
 
         // FIXME: oh jeebz...
         // Note: strafeToLinearHeading(new Vector2d(-52, -54), Math.PI/4)
         // is the BEST way to get back to score samples.
         // Sample X positions are at -48, -52, and -58
-        TrajectoryActionBuilder preloadPlaceSpecimen = drive.actionBuilder(initPose)
+        TrajectoryActionBuilder preloadPlaceSample = drive.actionBuilder(initPose)
                 .strafeTo(new Vector2d(-4, -56))
-                .strafeToLinearHeading(new Vector2d(-52, -54), Math.PI/4)
-                .strafeToLinearHeading(new Vector2d(-48, -54), Math.PI/2)
-                // extendo grab #1
-                .strafeToLinearHeading(new Vector2d(-57, -48), Math.PI/4)
-                .turn(Math.PI/4)
-                // extendo grab #2
                 .strafeToLinearHeading(new Vector2d(-52, -54), Math.PI/4);
 
-        Action finishProg = preloadPlaceSpecimen.endTrajectory().fresh().build();
+        TrajectoryActionBuilder sampleRight = preloadPlaceSample.endTrajectory().fresh()
+                .strafeToLinearHeading(new Vector2d(-44, -50), Math.PI/2);
 
-        Action preloading = preloadPlaceSpecimen.build();
+        TrajectoryActionBuilder ascent1 = preloadPlaceSample.endTrajectory().fresh()
+                .strafeToLinearHeading(new Vector2d(-16, 0), 0);
+
+
+
+        Action finishProg = ascent1.endTrajectory().fresh().build();
+
+
+        Action preloadPlace = preloadPlaceSample.build();
+        Action sampleRightGrab = sampleRight.build();
+
+        Action ascentStrafe = ascent1.build();
+
+        Actions.runBlocking(
+                new ParallelAction(
+                        extFront.clawClose(),
+                        extFront.transferIn(),
+                        extFront.backPivotBase(),
+                        extFront.frontPivotTransfer(),
+                        extFront.wristInit(),
+                        extBack.slidePivotBase(),
+                        extBack.slideClawClose()
+                )
+        );
 
         waitForStart();
+
+        if (isStopRequested()) return;
 
         Actions.runBlocking(
                 new SequentialAction(
                         new ParallelAction(
-                                preloading,
-                                slides.slidesUp()
+                                preloadPlace,
+                                slides.slidesUp(),
+                                extBack.slidePivotDrop()
                         ),
-                        slides.slidesDown(),
+                        extBack.slideClawOpen(),
+                        new ParallelAction(
+                                sampleRightGrab,
+                                extBack.slidePivotBase(),
+                                slides.slidesDown()
+                        ),
+                        extFront.transferExtend(),
+                        extFront.frontPivotGrab(),
+                        extFront.clawClose(),
+                        ascentStrafe,
                         finishProg
                 )
         );
