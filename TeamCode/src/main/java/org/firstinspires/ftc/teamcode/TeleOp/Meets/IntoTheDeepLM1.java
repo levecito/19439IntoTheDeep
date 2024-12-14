@@ -83,7 +83,7 @@ public class IntoTheDeepLM1 extends OpMode {
             frontExtension.frontPivotTransfer();
             frontExtension.wristInit();
             frontExtension.frontClawOpen();
-            frontExtension.transferInit();
+            frontExtension.transferIn();
             backLift.slidesBase();
         }
 

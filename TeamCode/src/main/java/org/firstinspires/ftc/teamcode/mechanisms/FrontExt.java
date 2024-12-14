@@ -30,7 +30,7 @@ public class FrontExt {
         frontPivotTransfer();
         wristInit();
         frontClawOpen();
-        transferInit();
+        transferIn();
     }
 
     /**
@@ -41,12 +41,12 @@ public class FrontExt {
         rightTransfer.setPosition(R);
     }
 
-    public void transferInit() {
-        setTransfer(0.4, 0.4);
+    public void transferIn() {
+        setTransfer(0.4, 0.45);
     }
 
     public void transferFullIn() {
-        setTransfer(0.4,0.4);
+        setTransfer(0.4,0.45);
     }
 
     public void transferMiddle() {
