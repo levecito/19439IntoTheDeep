@@ -109,7 +109,6 @@ public class IntoTheDeepLM2Auto extends LinearOpMode {
         }
     }
 
-    // TODO: Complete Servo class
     public static class ExtFront {
         private Servo backPivot;
         private Servo frontPivot;
@@ -269,7 +268,62 @@ public class IntoTheDeepLM2Auto extends LinearOpMode {
 
     }
 
-    public static class ServosBack {
+    public static class ExtBack {
+
+        private Servo slidePivot;
+        private Servo slideClaw;
+        public ExtBack(HardwareMap hwMap) {
+            slidePivot = hwMap.get(Servo.class, "slide pivot");
+            slideClaw = hwMap.get(Servo.class, "slide claw");
+        }
+
+        public class SlidePivotBase implements Action {
+            @Override
+            public boolean run(@NonNull TelemetryPacket packet) {
+                slidePivot.setPosition(0.0);
+                return false;
+            }
+        }
+
+        public Action slidePivotBase() {
+            return new SlidePivotBase();
+        }
+
+        public class SlidePivotDrop implements Action {
+            @Override
+            public boolean run(@NonNull TelemetryPacket packet) {
+                slidePivot.setPosition(0.8);
+                return false;
+            }
+        }
+
+        public Action slidePivotDrop() {
+            return new SlidePivotDrop();
+        }
+
+        public class SlideClawOpen implements Action {
+            @Override
+            public boolean run(@NonNull TelemetryPacket packet) {
+                slideClaw.setPosition(1.0);
+                return false;
+            }
+        }
+
+        public Action slideClawOpen() {
+            return new SlideClawOpen();
+        }
+
+        public class SlideClawClose implements Action {
+            @Override
+            public boolean run(@NonNull TelemetryPacket packet) {
+                slideClaw.setPosition(1.0);
+                return false;
+            }
+        }
+
+        public Action slideClawClose() {
+            return new SlideClawClose();
+        }
 
     }
 
